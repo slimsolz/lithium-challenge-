@@ -18,7 +18,7 @@ export async function register(input: IUserInput): Promise<IUserOutput> {
   const user = await User.create({
     firstName,
     lastName,
-    email,
+    email: email.toLowerCase(),
     password: hashedPassword,
   });
 
@@ -35,7 +35,7 @@ export async function login(
 ): Promise<{ token: string }> {
   const { email, password } = input;
 
-  const user = await User.findOne({ email: email.toLowerCase() });
+  const user = await User.findOne({ where: { email: email.toLowerCase() } });
   if (user && (await verifyPassword(password, user.password))) {
     const token = jwt.sign(
       {

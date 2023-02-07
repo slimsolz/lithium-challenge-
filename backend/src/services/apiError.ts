@@ -4,6 +4,6 @@ export class BadRequestResponse extends Error {
   }
 
   get statusCode(): number {
-    return 404;
+    return 400;
   }
 }

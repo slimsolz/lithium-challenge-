@@ -8,7 +8,7 @@ import validationMiddleware from "../middlewares/validation.middleware";
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) => {
-  successResponse(res, 200, "welcome to lithium challenge api");
+  successResponse(res, 200, "lithium challenge api");
 });
 
 router.post(

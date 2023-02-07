@@ -1,13 +1,24 @@
+import { errorResponse, successResponse } from "../helpers/responseUtil";
 import express, { Request, Response } from "express";
+
+import AuthController from "../controllers/auth.controller";
+import { UserSchema } from "../utils/schemas";
+import validationMiddleware from "../middlewares/validation.middleware";
 
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) => {
-  return res.status(200).json({ message: "welcome to lithium challenge api" });
+  successResponse(res, 200, "welcome to lithium challenge api");
 });
 
+router.post(
+  "/auth/register",
+  validationMiddleware(UserSchema),
+  AuthController.registerUserHandler
+);
+
 router.all("*", (req: Request, res: Response) => {
-  return res.status(404).json({ message: "404 route not found." });
+  errorResponse(res, 404, "404 route not found.");
 });
 
 export default router;

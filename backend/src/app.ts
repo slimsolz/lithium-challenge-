@@ -1,5 +1,6 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 
+import { BadRequestResponse } from "./services/apiError";
 import cors from "cors";
 import { errorResponse } from "./helpers/responseUtil";
 import helmet from "helmet";
@@ -18,7 +19,12 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err.name === "SequelizeUniqueConstraintError") {
     return errorResponse(res, 409, err.message);
   }
-    return errorResponse(res, 500, "Internal Error");
+
+  if (err instanceof BadRequestResponse) {
+    return errorResponse(res, err.statusCode, err.message);
+  }
+
+  return errorResponse(res, 500, "Internal Error");
 });
 
 export default app;

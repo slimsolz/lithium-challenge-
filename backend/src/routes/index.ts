@@ -1,8 +1,8 @@
+import { LoginSchema, RegisterSchema } from "../utils/schemas";
 import { errorResponse, successResponse } from "../helpers/responseUtil";
 import express, { Request, Response } from "express";
 
 import AuthController from "../controllers/auth.controller";
-import { UserSchema } from "../utils/schemas";
 import validationMiddleware from "../middlewares/validation.middleware";
 
 const router = express.Router();
@@ -13,8 +13,14 @@ router.get("/", (req: Request, res: Response) => {
 
 router.post(
   "/auth/register",
-  validationMiddleware(UserSchema),
+  validationMiddleware(RegisterSchema),
   AuthController.registerUserHandler
+);
+
+router.post(
+  "/auth/login",
+  validationMiddleware(LoginSchema),
+  AuthController.loginHandler
 );
 
 router.all("*", (req: Request, res: Response) => {

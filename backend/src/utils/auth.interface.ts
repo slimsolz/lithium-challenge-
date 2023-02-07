@@ -12,3 +12,5 @@ interface IUserAttributes {
 
 export interface IUserInput extends Optional<IUserAttributes, "id"> {}
 export interface IUserOutput extends Omit<IUserAttributes, "password"> {}
+export interface ILoginAttributes
+  extends Pick<IUserAttributes, "email" | "password"> {}

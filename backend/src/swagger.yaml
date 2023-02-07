@@ -1,0 +1,112 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: lithium-challenge-api
+  description: API for lithium challenge
+  # Developer contact
+  contact:
+    email: odumahs@gmail.com
+basePath: /api/v1
+
+# tags are used for organizing operations
+tags:
+- name: auth
+  description: Operation for auth
+
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary:  Register a user
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: user
+        description: The data to create a new user.
+        schema:
+          type: object
+          required:
+            - userName
+          properties:
+            firstName:
+              type: string
+              example: John
+            lastName:
+              type: string
+              example: Doe
+            email:
+              type: string
+              example: jachdoe@gmail.com
+            password:
+              type: string
+              example: pas5wORd*123
+      responses:
+        201:
+          description: registration successful
+          examples:
+            application/json:
+              status: success
+              message: registration successful
+              data:
+                id: 1
+                firstName:  user first name
+                lastName:  user first name
+                email:  user email
+        409:
+          description: Duplicate user
+          examples:
+            application/json:
+              status: error
+              message: Invalid email
+        442:
+            description: Validation failed
+            examples:
+              application/json:
+                status: error
+                message: name is required
+
+  /auth/login:
+      post:
+        tags:
+          - auth
+        summary:  Log user in
+        produces:
+        - application/json
+        parameters:
+        - in: body
+          name: user
+          description: The data to log a user in.
+          schema:
+            type: object
+            required:
+              - userName
+            properties:
+              email:
+                type: string
+                example: jachdoe@gmail.com
+              password:
+                type: string
+                example: pas5wORd*123
+        responses:
+          201:
+            description: login successful
+            examples:
+              application/json:
+                status: success
+                message: login successful
+                data:
+                  token: token_string
+          400:
+            description: Invalid Credentials
+            examples:
+              application/json:
+                status: error
+                message: invalid credentials
+          442:
+              description: Validation failed
+              examples:
+                application/json:
+                  status: error
+                  message: email is required

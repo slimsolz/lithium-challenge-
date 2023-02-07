@@ -1,0 +1,11 @@
+logs
+*.log
+coverage
+*.lcov
+.nyc_output
+node_modules/
+jspm_packages/
+.DS_Store
+.env.test
+.env.dev
+build

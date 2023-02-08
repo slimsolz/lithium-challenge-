@@ -32,7 +32,7 @@ export async function register(input: IUserInput): Promise<IUserOutput> {
 
 export async function login(
   input: ILoginAttributes
-): Promise<{ token: string }> {
+): Promise<Record<string, any>> {
   const { email, password } = input;
 
   const user = await User.findOne({ where: { email: email.toLowerCase() } });
@@ -48,7 +48,13 @@ export async function login(
       { expiresIn: process.env.TOKEN_EXPIRATION as string }
     );
 
-    return { token };
+    return {
+      token,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    };
   } else {
     throw new BadRequestResponse("invalid credentials");
   }

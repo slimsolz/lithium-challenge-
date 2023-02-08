@@ -22,8 +22,32 @@ After you have completed the task, please send us a .zip file of the repo, but f
 
 **Your name**
 
-`________________`
+`Solomon Odumah`
 
 **Why did you choose the tech you did?**
 
-`Don't worry about detailing every single package used, but try and justify some of your choices and your reason for making them. We want people who think in features, and how they impact the wider systems going forward, so we expect you to make reasoned decisions with intent!`
+**Backend**
+
+Security can not be over emphasized when developing any application, Its very important to always secure your application, Considering this, I chose the following packages to help:
+
+- Helmet: this helps in securing an Express app by setting various HTTP headers.
+- Bcrypt: this helps with hashing users passwords before been saved to the database
+- Joi: this is used to validate values the user gives us to make sure it is exactly what our database expects
+
+Testing is also an important part of building an application, this helps in identifying possible bugs in our features/endpoints before our application goes into production. To achieve this, I used the following:
+
+- Jest: this is an easy to setup/use testing framework
+- Supertest: this is used with Jest for HTTP assertions.
+
+Documenting your API, can be a primary resource for explaining what is possible with your API and how to get started/use the API. It also serves as a place for developers to return with questions about functionality. For this, I used:
+
+- Swagger: Swagger works both for testing and documenting, unlike Jest and supertest which helps with automated testing, testing with swagger is manual, making it sometimes tiring.
+
+Working with database:
+
+- Sequelize: ORM offers high-level RDB abstraction allowing developers to write code in simple programming languages of their choice instead of using SQL to access, add, update, and delete data and schemas in the respective database.
+
+**Frontend**
+
+- axios: is a promise-based third-party HTTP client library for making network requests. I used this because its easier to use than traditional Fetch API
+- antd: this has easy to use components and hooks making it easy to work with react.

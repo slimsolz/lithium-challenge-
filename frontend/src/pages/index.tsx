@@ -6,20 +6,18 @@ import { isLoggedIn } from "@/services/auth.services";
 
 export default function Home() {
   const [user, setUser] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const user = isLoggedIn();
-    if (!user) {
+    const userData = isLoggedIn();
+    if (!userData) {
       Router.push("/login");
     }
-    setUser(user);
-    setIsLoading(false);
+    setUser(userData);
   }, []);
 
   return (
     <PageLayout user={user}>
-      {isLoading ? (
+      {!user ? (
         "Loading"
       ) : (
         <p style={{ textAlign: "center", marginTop: "30px", fontSize: "50px" }}>
